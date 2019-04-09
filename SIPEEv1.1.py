@@ -28,8 +28,8 @@ if raio_a >= 440:
             q_n2 = ic_n2/2
             raio_b2 = (t2-q_n2)/tan(ac_b/2)
             if raio_b1 == raio_b2:
-                p = (ic_n2^2)/24*raio_b2
-                raio_b = raio_b2 - p
+                pb = (ic_n2^2)/24*raio_b2
+                raio_b = raio_b2 - pb
                 break
             elif raio_b1 != raio_b2:
                 raio_b1 = raio_b2
@@ -47,8 +47,8 @@ else:
         q_n1 = ic_n1/2
         raio_a2 = (t3-q_n1)/tan(ac_a/2)
         if raio_a1 == raio_a2:
-            p = (ic_n1^2)/24*raio_a2
-            raio_a = raio_a2 - p
+            pa = (ic_n1^2)/24*raio_a2
+            raio_a = raio_a2 - pa
             break
         elif raio_a1 != raio_a2:
             raio_a1 = raio_a2
@@ -59,8 +59,8 @@ else:
         q_n2 = ic_n2/2
         raio_b2 = (t3-q_n2)/tan(ac_b/2)
         if raio_b1 == raio_b2:
-            p = (ic_n2^2)/24*raio_b2
-            raio_b = raio_b2 - p
+            pb = (ic_n2^2)/24*raio_b2
+            raio_b = raio_b2 - pb
             break
         elif raio_b1 != raio_b2:
             raio_b1 = raio_b2
