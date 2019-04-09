@@ -1,3 +1,5 @@
+import math
+
 print('cálculo dos raios verticais'.title())
 
 d = int(input('Entre com a extensão do trecho (m): '))
@@ -12,10 +14,10 @@ else:
 
 #1º hipotese CCS x CCS
 
-raio_a = t/tan(ac_a/2)
+raio_a = t/math.tan(ac_a/2)
 
 if raio_a >= 440:
-    raio_b = t/tan(ac_b/2)
+    raio_b = t/math.tan(ac_b/2)
     if raio_b >= 440:
         print('1º Hipotese atendida com raio 1 = {}.'.format(raio_a))
         print('1º Hipotese atendida com raio 2 = {}.'.format(raio_b))
@@ -26,7 +28,7 @@ if raio_a >= 440:
         while True:
             ic_n2 = 6*(raio_b1)**0.5
             q_n2 = ic_n2/2
-            raio_b2 = (t2-q_n2)/tan(ac_b/2)
+            raio_b2 = (t2-q_n2)/math.tan(ac_b/2)
             if raio_b1 == raio_b2:
                 pb = (ic_n2**2)/24*raio_b2
                 raio_b = raio_b2 - pb
@@ -41,12 +43,12 @@ if raio_a >= 440:
 else:
     #3º hipotese CCT x CCT
     t3 = d/2
-    raio_a = t3/tan(ac_a/2)
+    raio_a = t3/math.tan(ac_a/2)
     raio_a1=raio_a
     while True:
         ic_n1 = 6*(raio_a1)**0.5
         q_n1 = ic_n1/2
-        raio_a2 = (t3-q_n1)/tan(ac_a/2)
+        raio_a2 = (t3-q_n1)/math.tan(ac_a/2)
         if raio_a1 == raio_a2:
             pa = (ic_n1**2)/24*raio_a2
             raio_a = raio_a2 - pa
@@ -54,12 +56,12 @@ else:
         elif raio_a1 != raio_a2:
             raio_a1 = raio_a2
             continue
-    raio_b = t3/tan(ac_b/2)
+    raio_b = t3/math.tan(ac_b/2)
     raio_b1=raio_b
     while True:
         ic_n2 = 6*(raio_b1)**0.5
         q_n2 = ic_n2/2
-        raio_b2 = (t3-q_n2)/tan(ac_b/2)
+        raio_b2 = (t3-q_n2)/math.tan(ac_b/2)
         if raio_b1 == raio_b2:
             pb = (ic_n2**2)/24*raio_b2
             raio_b = raio_b2 - pb
