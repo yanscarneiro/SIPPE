@@ -26,27 +26,47 @@ while True:
 for a, b, c, d in zip (estação_i, estação_f, ângulo, extensão):
     print('E{0} - E{1} - A:{2} - Ex={3} m'.format(a, b, c, d))
     
-ãngulo_r = math.radians(ângulo)
+#math.radians(ângulo)
 
 #calculo dos raios
 
-m_r = 0
+m_r = -1
 while True:
-    if m_r < n:
+    if m_r < n - 1:
+        extensão.append(10000000)
         m_r += 1
+        ac = math.radians(ângulo[m_r])
+        m_r2 = m_r + 1
+        if extensão[m_r] > extensão[m_r2]:
+            d = extensão[mr_2]
+        else:
+            d = extensão[m_r]
         if direção[m_r] == 0:
             t = (d-40)/2
         else:
             t = d/2
-        #1º hipotese CCS x CCS
-        
-        raio_a = t/math.tan(ângulo[m_r]/2)
-        
+        #hipotese CCS
+        raio_a = t/math.tan(ac/2)
         if raio_a >= 440:
-            raio_b = t/math.tan(ângulo[m_r+1]/2)
-            if raio_b >= 440:
-                print('1º Hipotese atendida com raio 1 = {}.'.format(raio_a)
-                print('1º Hipotese atendida com raio 2 = {}.'.format(raio_b))
-            else:
-                #2º hipotese CCS x CCT
-                t2 = t - 10
+            print('Curva {}-{}:'.format(estação_i[m_r],estação_f[m_r]))
+            print('Hipotese atendida para CCS com raio = {}.'.format(raio_a))
+        else:
+            #hipotese CCT
+            t3 = d/2
+            raio_a = t3/math.tan(ac/2)
+            raio_a1=raio_a
+            while True:
+                ic_n1 = 6*(raio_a1)**0.5
+                q_n1 = ic_n1/2
+                raio_a2 = (t3-q_n1)/math.tan(ac/2)
+                if raio_a1 == raio_a2:
+                    pa = (ic_n1**2)/24*raio_a2
+                    raio_a = raio_a2 - pa
+                    break
+                elif raio_a1 != raio_a2:
+                    raio_a1 = raio_a2
+                    continue
+            print('Curva {}-{}:'.format(estação_i[m_r],estação_f[m_r]))
+            print('Hipotese atendida para CCT com raio = {}.'.format(raio_a2))
+            print('Dados para curva : Ic = {}'.format(ic_n1))
+print('Final do Programa') 
