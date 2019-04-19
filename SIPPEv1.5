@@ -1,0 +1,80 @@
+import math
+
+print('SIPPE - SISTEMA INTEGRADO PARA PROJETO DE ESTRADAS')
+
+n = int(input('Entre com a quantidade de estações: '))
+print('cadastro das estações'.title())
+
+estação_i = []
+estação_f = []
+ângulo = []
+direção = []
+extensão = []
+
+extensão.insert(0, 10000000)
+
+m_c = 0
+while True:
+    if m_c < n:
+        m_c += 1
+        estação_i.append(int(input('Estação Inicial: ')))
+        estação_f.append(int(input('Estação Final: ')))
+        ângulo.append(float(input('Ãngulo: ')))
+        direção.append(int(input('Se Reversa <0> - Se Não Reversa <1>: ')))
+        extensão.append(float(input('Extensão do trecho reto: ')))
+    else:
+        break
+
+for a, b, c, d in zip (estação_i, estação_f, ângulo, extensão):
+    print('E{0} - E{1} - A:{2} - Ex={3} m'.format(a, b, c, d))
+    
+#math.radians(ângulo)
+
+#calculo dos raios
+
+m_r = 1
+e = -1
+while True:
+    if m_r < n + 1:
+        extensão.append(10000000)
+        m_r += 1
+        ac = math.radians(ângulo[m_r])
+        m_r2 = m_r + 1
+        m_r1 = m_r - 1
+        e += 1
+        en = e - 1
+        if extensão[m_r] > extensão[m_r1]:
+            d = extensão[m_r1]
+        if extensão[m_r] > extensão[m_r2]:
+            d = extensão[m_r2]
+        else:
+            d = extensão[m_r]
+        if direção[m_r1] == 0:
+            t = (d-40)/2
+        else:
+            t = d/2
+        #hipotese CCS
+        raio_a = t/math.tan(ac/2)
+        if raio_a >= 440:
+            print('Curva {}-{}:'.format(estação_i[e],estação_f[en]))
+            print('Hipotese atendida para CCS com raio = {}.'.format(raio_a))
+        else:
+            #hipotese CCT
+            t3 = d/2
+            raio_a = t3/math.tan(ac/2)
+            raio_a1=raio_a
+            while True:
+                ic_n1 = 6*(raio_a1)**0.5
+                q_n1 = ic_n1/2
+                raio_a2 = (t3-q_n1)/math.tan(ac/2)
+                if raio_a1 == raio_a2:
+                    pa = (ic_n1**2)/24*raio_a2
+                    raio_a = raio_a2 - pa
+                    break
+                elif raio_a1 != raio_a2:
+                    raio_a1 = raio_a2
+                    continue
+            print('Curva {}-{}:'.format(estação_i[e],estação_f[en]))
+            print('Hipotese atendida para CCT com raio = {}.'.format(raio_a2))
+            print('Dados para curva : Ic = {}'.format(ic_n1))
+print('Final do Programa')
